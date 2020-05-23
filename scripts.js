@@ -1,7 +1,3 @@
-//Podría usar otro acercamiento para que encaje bien en la página y sería calculando los anchos y altos de los pixeles SEGUN el window, y no al revés.
-//var pixelHorizontalQuantity=$(window).width()/150-2;
-//var pixelVerticalQuantity=$(window).height()/pixelHorizontalQuantity;
-
 var pageWidth=Math.trunc($(window).width()/22);
 var pageHeight=Math.trunc($(window).height()/22);
 var actualColour='red';
@@ -9,23 +5,14 @@ var mouseXPosition;
 var mouseYPosition;
 
 $(document).ready(function(){
-    var indicePixel=0;
+    var pixelIndex=0;
     for(var x=1;x<=pageHeight;x++){
-        $('#cuerpo').append('<div id="'+x+'" style="height:22px;width:100%;user-drag: none;-moz-user-select: none;"></div>');
+        $('#body').append('<div id="'+x+'" style="height:22px;width:100%;user-drag: none;-moz-user-select: none;"></div>');
         for(var i=1;i<=pageWidth;i++){
-            $('#'+x+'').append('<span class="pixel '+indicePixel+'" style="display:inline-block;width:20px;height:20px;border:1px solid black;margin:0"></span>');
-            indicePixel++;
+            $('#'+x+'').append('<span class="pixel '+pixelIndex+'" style="display:inline-block;width:20px;height:20px;border:1px solid black;margin:0"></span>');
+            pixelIndex++;
         }
     }    
-})
-
-$('#cuerpo').dblclick(function(){
-    //Falta lo del cambio de color, tal vez con un modal
-    console.log('doubleclick');
-})
-
-$('#changeColour').on('click',function(){
-    //actualColour=$('#colour').val();
 })
 
 $(document).on('mousemove',function(event){
@@ -44,11 +31,9 @@ function cleanPixel(){
 }
 
 function getPixelNumber(){
-
     if(mouseYPosition==0){
         return mouseXPosition;
     }
-
     return mouseXPosition+mouseYPosition*pageWidth; //Debo truncar porque si no me devuelve con coma (los for fu)
 }
 
